@@ -1,12 +1,11 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Joe Blau on 6/6/19.
 //
 
 import Foundation
-
 
 public struct NomicsAPIEndpoint {
     let components: URLComponents
@@ -19,12 +18,12 @@ enum NomicsAPI {
     case candles(Candles)
     case volume(Volume)
     case exchangeRates(ExchangeRates)
-    
+
     var endpoint: NomicsAPIEndpoint {
         var components = URLComponents()
         components.scheme = scheme
         components.host =  host
-        
+
         switch self {
         case .currencies(let currencies):
             components.path = currencies.path
@@ -48,11 +47,11 @@ enum NomicsAPI {
             return NomicsAPIEndpoint(components: components, responseModel: exchangeRates.model)
         }
     }
-    
+
     var scheme: String {
         return "https"
     }
-    
+
     var host: String {
         return "api.nomics.com"
     }

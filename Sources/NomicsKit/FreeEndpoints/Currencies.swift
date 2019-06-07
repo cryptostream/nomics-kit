@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Joe Blau on 6/5/19.
 //
@@ -16,7 +16,7 @@ enum Currencies {
     case currenciesSparkline(start: Date, end: Date? = nil)
     case suppliesInterval(start: Date, end: Date? = nil)
     case allTimeHighs
-    
+
     var path: String {
         switch self {
         case .currenciesTicker: return "/v1/currencies/ticker"
@@ -29,7 +29,7 @@ enum Currencies {
         case .allTimeHighs: return "/v1/currencies/highs"
         }
     }
-    
+
     var queryItems: [URLQueryItem] {
         var queryItems = [URLQueryItem]()
 
@@ -42,7 +42,7 @@ enum Currencies {
             currency.flatMap {
                 queryItems.append(URLQueryItem(name: "quote-currency", value: $0))
             }
-            
+
         case .currencies(let ids, let attributes):
             ids.flatMap {
                 let value = $0.joined(separator: ",")
@@ -52,7 +52,7 @@ enum Currencies {
                 let value = $0.map { $0.rawValue }.joined(separator: ",")
                 queryItems.append(URLQueryItem(name: "attributes", value: value))
             }
-            
+
         case .currenciesInterval(let start, let end),
              .currenciesSparkline(let start, let end),
              .suppliesInterval(let start, let end):
@@ -60,16 +60,16 @@ enum Currencies {
             end.flatMap {
                 queryItems.append(URLQueryItem(name: "end", value: DateFormatter.nomics.string(from: $0)))
             }
-            
+
         case .prices,
              .dashboard,
              .allTimeHighs:
             break
         }
-        
+
         return queryItems
     }
-    
+
     var model: ResponseType {
         switch self {
         case .currenciesTicker: return .currenciesTicker([CurrencyTicker].self)
@@ -83,4 +83,3 @@ enum Currencies {
         }
     }
 }
-

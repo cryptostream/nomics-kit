@@ -1,6 +1,6 @@
 //
 //  ExchangeRatesswift
-//  
+//
 //
 //  Created by Joe Blau on 6/5/19.
 //
@@ -11,7 +11,7 @@ enum ExchangeRates {
     case exchangeRates
     case exchangeRatesHistory(currency: String, start: Date, end: Date? = nil)
     case exchangeRatesInterval(start: Date, end: Date? = nil)
-    
+
     var path: String {
         switch self {
         case .exchangeRates: return "/v1/exchange-rates"
@@ -19,14 +19,14 @@ enum ExchangeRates {
         case .exchangeRatesInterval: return "/v1/exchange-rates/interval"
         }
     }
-    
+
     var queryItems: [URLQueryItem] {
         var queryItems = [URLQueryItem]()
 
         switch self {
         case .exchangeRates:
             break
-            
+
         case .exchangeRatesHistory(let currency, let start, let end):
             queryItems.append(URLQueryItem(name: "currency", value: currency))
             queryItems.append(URLQueryItem(name: "start", value: DateFormatter.nomics.string(from: start)))
@@ -40,7 +40,7 @@ enum ExchangeRates {
                 queryItems.append(URLQueryItem(name: "end", value: DateFormatter.nomics.string(from: $0)))
             }
         }
-        
+
         return queryItems
     }
 
