@@ -3,10 +3,12 @@ import XCTest
 
 final class NomicsAPITests: XCTestCase {
 
-    func testEndpoint_volume() {
-//        XCTAssertEqual(NomicsAPI.volume(.globalVolumeHistory).url, "https://api.nomics.com/v1/volume/history")
+    func testInstantiaton() {
+        XCTAssertEqual(NomicsAPI.currencies(.dashboard).host, "api.nomics.com")
+        XCTAssertEqual(NomicsAPI.currencies(.dashboard).scheme, "https")
     }
 
-//    static var allTests = [
-//    ]
+    static var allTests = [
+        ("testInstantiaton", testInstantiaton),
+    ]
 }

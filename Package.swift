@@ -18,5 +18,6 @@ let package = Package(
         .testTarget(
             name: "NomicsKitTests",
             dependencies: ["NomicsKit"]),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )

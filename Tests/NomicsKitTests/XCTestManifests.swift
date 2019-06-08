@@ -3,7 +3,7 @@ import XCTest
 #if !canImport(ObjectiveC)
 public func allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(NomicsKitTests.allTests),
+        testCase(NomicsTests.allTests),
 
         testCase(CandleTests.allTests),
         testCase(CurrenciesTests.allTests),
@@ -11,6 +11,11 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(MarketsTests.allTests),
         testCase(VolumeTests.allTests),
 
+        testCase(DateFormatter_ExtensionsTests.allTests),
+        
+        testCase(NomicsAPITests.allTests),
+
+        testCase(NomicsTests.allTests),
     ]
 }
 #endif
