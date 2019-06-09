@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ResponseType {
+public enum ResponseModel {
     // Currency
     case currenciesTicker([CurrencyTicker].Type)
     case currencies([Currency].Type)

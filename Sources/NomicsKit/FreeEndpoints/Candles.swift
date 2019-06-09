@@ -35,7 +35,7 @@ enum Candles {
         return queryItems
     }
 
-    var model: ResponseType {
+    var model: ResponseModel {
         switch self {
         case .aggregatedOHLCVCandles: return .aggregatedOHLCVCandles([AggregatedOHLCVCandle].self)
         }

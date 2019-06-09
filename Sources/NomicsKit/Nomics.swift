@@ -22,12 +22,12 @@ public final class Nomics {
     }
 
     public func request(endpoint: NomicsAPIEndpoint, completion: @escaping (Result<Decodable, Error>) -> Void) {
-        var authEndpoint = endpoint.components
-        authEndpoint.queryItems = [URLQueryItem(name: "key", value: key)] + (authEndpoint.queryItems ?? [URLQueryItem]())
+        
+        guard let request = buildRequest(endpoint: endpoint) else {
+            return
+        }
 
-        guard let url = authEndpoint.url else { return }
-
-        let task = sharedSession.dataTask(with: url) { data, _, error in
+        let task = sharedSession.dataTask(with: request) { data, _, error in
             if let data = data {
                 do {
                     switch endpoint.responseModel {
@@ -69,5 +69,19 @@ public final class Nomics {
             }
         }
         task.resume()
+    }
+    
+    private func buildRequest(endpoint: NomicsAPIEndpoint) -> URLRequest? {
+        var components = endpoint.components
+        
+        switch components.queryItems {
+        case .none:
+            components.queryItems = [URLQueryItem(name: "key", value: key)]
+        case .some(let queryItems):
+            components.queryItems = queryItems + [URLQueryItem(name: "key", value: key)]
+        }
+        
+        guard let url = components.url else { return nil }
+        return URLRequest(url: url)
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 public struct NomicsAPIEndpoint {
     let components: URLComponents
-    let responseModel: ResponseType
+    let responseModel: ResponseModel
 }
 
 enum NomicsAPI {

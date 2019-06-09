@@ -86,7 +86,7 @@ enum Markets {
         return queryItems
     }
 
-    var model: ResponseType {
+    var model: ResponseModel {
         switch self {
         case .markets: return .markets([Market].self)
         case .marketPrices: return .marketPrices([MarketPrice].self)

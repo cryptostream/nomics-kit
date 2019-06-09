@@ -44,7 +44,7 @@ enum ExchangeRates {
         return queryItems
     }
 
-    var model: ResponseType {
+    var model: ResponseModel {
         switch self {
         case .exchangeRates: return .exchangeRates([ExchangeRate].self)
         case .exchangeRatesHistory: return .exchangeRatesHistory([ExchangeRateHistory].self)

@@ -70,7 +70,7 @@ enum Currencies {
         return queryItems
     }
 
-    var model: ResponseType {
+    var model: ResponseModel {
         switch self {
         case .currenciesTicker: return .currenciesTicker([CurrencyTicker].self)
         case .currencies: return .currencies([Currency].self)

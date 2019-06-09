@@ -32,7 +32,7 @@ enum Volume {
         return queryItems
     }
 
-    var model: ResponseType {
+    var model: ResponseModel {
         switch self {
         case .globalVolumeHistory: return .globalVolumeHistory([VolumeHistory].self)
         }
