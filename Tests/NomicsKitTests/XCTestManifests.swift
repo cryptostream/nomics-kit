@@ -12,7 +12,7 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(VolumeTests.allTests),
 
         testCase(DateFormatter_ExtensionsTests.allTests),
-        
+
         testCase(NomicsAPITests.allTests),
 
         testCase(NomicsTests.allTests),

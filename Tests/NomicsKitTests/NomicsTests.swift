@@ -1,3 +1,4 @@
+import Combine
 import XCTest
 @testable import NomicsKit
 
@@ -6,15 +7,14 @@ final class NomicsTests: XCTestCase {
 
     func testNomics_request() {
         let expect = XCTestExpectation(description: "Endpoint Request")
-
-        nomics.request(endpoint: NomicsAPI.currencies(.dashboard).endpoint) { result in
-            switch result {
-            case .success(let data): XCTAssertNotNil(data)
-            case .failure: XCTFail("failure")
-            }
+        let subscriber = AnySubscriber<Decodable, Error>(receiveSubscription: { subscription in
+            subscription.request(.unlimited)
+        }, receiveValue: { (_) -> Subscribers.Demand in
             expect.fulfill()
-        }
+            return .none
+        })
 
+        try? nomics.request(endpoint: NomicsAPI.currencies(.dashboard).endpoint).receive(subscriber: subscriber)
         wait(for: [expect], timeout: 2)
     }
 

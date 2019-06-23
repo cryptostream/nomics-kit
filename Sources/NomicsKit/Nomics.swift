@@ -5,7 +5,13 @@
 //  Created by Joe Blau on 6/4/19.
 //
 
+import Combine
 import Foundation
+
+public enum NomicsError: Error {
+    case buildRequestError
+    case httpStatusError
+}
 
 public final class Nomics {
     private var key: String
@@ -21,67 +27,64 @@ public final class Nomics {
         self.key = key
     }
 
-    public func request(endpoint: NomicsAPIEndpoint, completion: @escaping (Result<Decodable, Error>) -> Void) {
-        
-        guard let request = buildRequest(endpoint: endpoint) else {
-            return
-        }
-
-        let task = sharedSession.dataTask(with: request) { data, _, error in
-            if let data = data {
+    public func request(endpoint: NomicsAPIEndpoint) throws -> AnyPublisher<Decodable, Error> {
+        let request = try buildRequest(endpoint: endpoint)
+        return sharedSession.dataTaskPublisher(for: request)
+            .tryMap({ (data, response) -> Decodable in
+                guard let httpReponse = response as? HTTPURLResponse,
+                    httpReponse.statusCode == 200 else {
+                        throw NomicsError.httpStatusError
+                }
                 do {
                     switch endpoint.responseModel {
 
                     // Currencies
-                    case .currenciesTicker(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .currencies(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .price(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .dashboard(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .currenciesInterval(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .currenciesSparkline(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .suppliesInterval(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .allTimeHighs(let type): completion(.success(try self.decoder.decode(type, from: data)))
+                    case .currenciesTicker(let type): return try self.decoder.decode(type, from: data)
+                    case .currencies(let type): return try self.decoder.decode(type, from: data)
+                    case .price(let type): return try self.decoder.decode(type, from: data)
+                    case .dashboard(let type): return try self.decoder.decode(type, from: data)
+                    case .currenciesInterval(let type): return try self.decoder.decode(type, from: data)
+                    case .currenciesSparkline(let type): return try self.decoder.decode(type, from: data)
+                    case .suppliesInterval(let type): return try self.decoder.decode(type, from: data)
+                    case .allTimeHighs(let type): return try self.decoder.decode(type, from: data)
 
                     // Markets
-                    case .markets(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .marketPrices(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .marketInterval(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .exchangeMarketPrices(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .exchangeMarketInterval(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .marketCapHistory(let type): completion(.success(try self.decoder.decode(type, from: data)))
+                    case .markets(let type): return try self.decoder.decode(type, from: data)
+                    case .marketPrices(let type): return try self.decoder.decode(type, from: data)
+                    case .marketInterval(let type): return try self.decoder.decode(type, from: data)
+                    case .exchangeMarketPrices(let type): return try self.decoder.decode(type, from: data)
+                    case .exchangeMarketInterval(let type): return try self.decoder.decode(type, from: data)
+                    case .marketCapHistory(let type): return try self.decoder.decode(type, from: data)
 
                     // Candles
-                    case .aggregatedOHLCVCandles(let type): completion(.success(try self.decoder.decode(type, from: data)))
+                    case .aggregatedOHLCVCandles(let type): return try self.decoder.decode(type, from: data)
 
                     // Volume
-                    case .globalVolumeHistory(let type): completion(.success(try self.decoder.decode(type, from: data)))
+                    case .globalVolumeHistory(let type): return try self.decoder.decode(type, from: data)
 
                     // Exchange Rates
-                    case .exchangeRates(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .exchangeRatesHistory(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                    case .exchangeRatesInterval(let type): completion(.success(try self.decoder.decode(type, from: data)))
+                    case .exchangeRates(let type): return try self.decoder.decode(type, from: data)
+                    case .exchangeRatesHistory(let type): return try self.decoder.decode(type, from: data)
+                    case .exchangeRatesInterval(let type): return try self.decoder.decode(type, from: data)
                     }
                 } catch {
-                    print(error)
+                    throw error
                 }
-            } else if let error = error {
-                completion(.failure(error))
-            }
-        }
-        task.resume()
+            })
+            .eraseToAnyPublisher()
     }
-    
-    private func buildRequest(endpoint: NomicsAPIEndpoint) -> URLRequest? {
+
+    private func buildRequest(endpoint: NomicsAPIEndpoint) throws -> URLRequest {
         var components = endpoint.components
-        
+
         switch components.queryItems {
         case .none:
             components.queryItems = [URLQueryItem(name: "key", value: key)]
         case .some(let queryItems):
             components.queryItems = queryItems + [URLQueryItem(name: "key", value: key)]
         }
-        
-        guard let url = components.url else { return nil }
+
+        guard let url = components.url else { throw NomicsError.buildRequestError }
         return URLRequest(url: url)
     }
 }

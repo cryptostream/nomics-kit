@@ -21,13 +21,15 @@ import NomicsKit
 Create instance and request. Tthe `NomicsAPIEndpoint` type will automatically return a strongly typed object
 
 ```swift
+
+// Create a subscriber 
+let subscriber = AnySubscriber<Decodable, Error>(receiveSubscription: { (subscription) in
+    subscription.request(.unlimited)
+}, receiveValue: { (value) -> Subscribers.Demand in
+    // print(value)
+    return .none
+})
+
 let nomics = Nomics(key: "YOUR_NOMICS_API_KEY")
-nomics.request(endpoint: NomicsAPI.currencies(.dashboard).endpoint) { (result) in
-    switch result {
-    case .success(let data):
-        print(data)
-    case .failure(let error):
-        print(error.description)
-    }
-}
+try? nomics.request(endpoint: NomicsAPI.currencies(.dashboard).endpoint).receive(subscriber: subscriber)
 ```
