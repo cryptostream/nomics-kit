@@ -17,7 +17,7 @@ public final class Nomics {
         return URLSession(configuration: configuration)
     }()
 
-    init(key: String = "2018-09-demo-dont-deploy-b69315e440beb145") {
+    public init(key: String = "2018-09-demo-dont-deploy-b69315e440beb145") {
         self.key = key
     }
 
