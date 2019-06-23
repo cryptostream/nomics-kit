@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Candles {
+public enum Candles {
     case aggregatedOHLCVCandles(interval: [Interval], currency: String, start: Date? = nil, end: Date? = nil)
 
     var path: String {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Volume {
+public enum Volume {
     case globalVolumeHistory(start: Date? = nil, end: Date? = nil)
 
     var path: String {

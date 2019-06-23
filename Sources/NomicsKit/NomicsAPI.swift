@@ -12,14 +12,14 @@ public struct NomicsAPIEndpoint {
     let responseModel: ResponseModel
 }
 
-enum NomicsAPI {
+public enum NomicsAPI {
     case currencies(Currencies)
     case markets(Markets)
     case candles(Candles)
     case volume(Volume)
     case exchangeRates(ExchangeRates)
 
-    var endpoint: NomicsAPIEndpoint {
+    public var endpoint: NomicsAPIEndpoint {
         var components = URLComponents()
         components.scheme = scheme
         components.host =  host

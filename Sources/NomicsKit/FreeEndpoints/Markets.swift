@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Markets {
+public enum Markets {
     case markets(exchange: String? = nil, base: [String]? = nil, quote: [String]? = nil)
     case marketPrices(currency: String)
     case marketInterval(currency: String, hours: Int = 1, start: Date? = nil, end: Date? = nil )

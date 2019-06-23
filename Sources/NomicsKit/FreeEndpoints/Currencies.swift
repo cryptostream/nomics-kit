@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Currencies {
+public enum Currencies {
     case currenciesTicker(intervals: [Interval]? = nil, currency: String? = nil)
     case currencies(ids: [String]? = nil, attributes: [Attiributes]? = nil)
     case prices

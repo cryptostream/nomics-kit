@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ExchangeRates {
+public enum ExchangeRates {
     case exchangeRates
     case exchangeRatesHistory(currency: String, start: Date, end: Date? = nil)
     case exchangeRatesInterval(start: Date, end: Date? = nil)
