@@ -8,9 +8,9 @@
 import Foundation
 
 public struct AllTimeHigh: Codable {
-    var currency: String
-    var price: String?
-    var timestamp: String?
-    var exchange: String?
-    var quote: String?
+    public let currency: String
+    public let price: String?
+    public let timestamp: String?
+    public let exchange: String?
+    public let quote: String?
 }

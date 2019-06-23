@@ -8,7 +8,7 @@
 import Foundation
 
 public struct CurrencySparkline: Codable {
-    let currency: String
-    let timestamps: [String]?
-    let prices: [String]?
+    public let currency: String
+    public let timestamps: [String]?
+    public let prices: [String]?
 }

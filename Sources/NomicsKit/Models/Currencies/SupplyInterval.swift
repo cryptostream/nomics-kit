@@ -8,11 +8,11 @@
 import Foundation
 
 public struct SupplyInterval: Codable {
-    let currency: String
-    let openAvailable: String
-    let openMax: String
-    let openTimestamp: String
-    let closeAvailable: String
-    let closeMax: String
-    let closeTimestamp: String
+    public let currency: String
+    public let openAvailable: String
+    public let openMax: String
+    public let openTimestamp: String
+    public let closeAvailable: String
+    public let closeMax: String
+    public let closeTimestamp: String
 }

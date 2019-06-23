@@ -8,6 +8,6 @@
 import Foundation
 
 public struct ExchangeRateHistory: Codable {
-    let timestamp: String
-    let rate: String
+    public let timestamp: String
+    public let rate: String
 }

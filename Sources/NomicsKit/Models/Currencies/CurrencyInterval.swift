@@ -8,10 +8,10 @@
 import Foundation
 
 public struct CurrencyInterval: Codable {
-    let currency: String
-    let volume: String
-    let open: String
-    let openTimestamp: String
-    let close: String
-    let closeTimestamp: String
+    public let currency: String
+    public let volume: String
+    public let open: String
+    public let openTimestamp: String
+    public let close: String
+    public let closeTimestamp: String
 }

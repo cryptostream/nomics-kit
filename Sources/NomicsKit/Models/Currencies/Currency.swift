@@ -8,21 +8,21 @@
 import Foundation
 
 public struct Currency: Codable {
-    var id: String
-    var originalSymbol: String
-    var name: String
-    var description: String
-    var websiteURL: String
-    var logoURL: String
-    var blogURL: String
-    var discordURL: String
-    var facebookURL: String
-    var githubURL: String
-    var mediumURL: String
-    var redditURL: String
-    var telegramURL: String
-    var twitterURL: String
-    var whitepaperURL: String
-    var youtubeURL: String
-    var replacedBy: String
+    public let id: String
+    public let originalSymbol: String
+    public let name: String
+    public let description: String
+    public let websiteURL: String
+    public let logoURL: String
+    public let blogURL: String
+    public let discordURL: String
+    public let facebookURL: String
+    public let githubURL: String
+    public let mediumURL: String
+    public let redditURL: String
+    public let telegramURL: String
+    public let twitterURL: String
+    public let whitepaperURL: String
+    public let youtubeURL: String
+    public let replacedBy: String
 }

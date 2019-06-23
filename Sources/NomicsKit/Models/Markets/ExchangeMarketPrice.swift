@@ -8,9 +8,9 @@
 import Foundation
 
 public struct ExchangeMarketPrice: Codable {
-    let exchange: String
-    let base: String
-    let quote: String
-    let priceQuote: String
-    let timestamp: String
+    public let exchange: String
+    public let base: String
+    public let quote: String
+    public let priceQuote: String
+    public let timestamp: String
 }

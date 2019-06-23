@@ -8,8 +8,8 @@
 import Foundation
 
 public struct MarketPrice: Codable {
-    let exchange: String
-    let quote: String
-    let price: String
-    let timestamp: String
+    public let exchange: String
+    public let quote: String
+    public let price: String
+    public let timestamp: String
 }

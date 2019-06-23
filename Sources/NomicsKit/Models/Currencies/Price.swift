@@ -8,6 +8,6 @@
 import Foundation
 
 public struct Price: Codable {
-    let currency: String
-    let price: String
+    public let currency: String
+    public let price: String
 }

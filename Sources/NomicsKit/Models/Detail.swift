@@ -8,6 +8,6 @@
 import Foundation
 
 public struct Detail: Codable {
-    var name: String
-    var logo: String?
+    public var name: String
+    public var logo: String?
 }

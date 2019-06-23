@@ -8,14 +8,14 @@
 import Foundation
 
 public struct ExchangeMarketInterval: Codable {
-    let exchange: String
-    let base: String
-    let quote: String
-    let volumeBase: String
-    let volumeUsd: String
-    let openQuote: String
-    let openTimestamp: String
-    let closeQuote: String
-    let closeTimestamp: String
-    let numTrades: String
+    public let exchange: String
+    public let base: String
+    public let quote: String
+    public let volumeBase: String
+    public let volumeUsd: String
+    public let openQuote: String
+    public let openTimestamp: String
+    public let closeQuote: String
+    public let closeTimestamp: String
+    public let numTrades: String
 }

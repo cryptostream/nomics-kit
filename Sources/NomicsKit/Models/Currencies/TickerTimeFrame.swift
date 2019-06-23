@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct TickerTimeFrame: Codable {
-    let marketCapChange: String
-    let marketCapChangePct: String
-    let priceChange: String
-    let priceChangePct: String
-    let volume: String
-    let volumeChange: String
-    let volumeChangePct: String
+public struct TickerTimeFrame: Codable {
+    public let marketCapChange: String
+    public let marketCapChangePct: String
+    public let priceChange: String
+    public let priceChangePct: String
+    public let volume: String
+    public let volumeChange: String
+    public let volumeChangePct: String
 }

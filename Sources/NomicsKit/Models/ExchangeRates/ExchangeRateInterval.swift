@@ -8,9 +8,9 @@
 import Foundation
 
 public struct ExchangeRateInterval: Codable {
-    let currency: String
-    let open: String
-    let openTimestamp: String
-    let close: String
-    let closeTimestamp: String
+    public let currency: String
+    public let open: String
+    public let openTimestamp: String
+    public let close: String
+    public let closeTimestamp: String
 }

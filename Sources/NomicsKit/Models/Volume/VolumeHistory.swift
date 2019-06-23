@@ -8,6 +8,6 @@
 import Foundation
 
 public struct VolumeHistory: Codable {
-    let timestamp: String
-    let volume: String
+    public let timestamp: String
+    public let volume: String
 }

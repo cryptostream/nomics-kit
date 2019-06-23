@@ -8,8 +8,8 @@
 import Foundation
 
 public struct Market: Codable {
-    let exchange: String
-    let market: String
-    let base: String
-    let quote: String
+    public let exchange: String
+    public let market: String
+    public let base: String
+    public let quote: String
 }

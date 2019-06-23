@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ExchangeRate: Codable {
-    let currency: String
-    let rate: String
-    let timestamp: String
+    public let currency: String
+    public let rate: String
+    public let timestamp: String
 }

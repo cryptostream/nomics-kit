@@ -8,10 +8,10 @@
 import Foundation
 
 public struct AggregatedOHLCVCandle: Codable {
-    let timestamp: String
-    let low: String
-    let open: String
-    let close: String
-    let high: String
-    let volume: String
+    public let timestamp: String
+    public let low: String
+    public let open: String
+    public let close: String
+    public let high: String
+    public let volume: String
 }

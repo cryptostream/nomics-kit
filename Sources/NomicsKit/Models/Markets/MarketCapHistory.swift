@@ -8,6 +8,6 @@
 import Foundation
 
 public struct MarketCapHistory: Codable {
-    let timestamp: String
-    let marketCap: String
+    public let timestamp: String
+    public let marketCap: String
 }
